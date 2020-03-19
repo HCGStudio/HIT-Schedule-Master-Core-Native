@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Get requirements
-      run: sudo apt-get install qemu qemu-user-static binfmt-support debootstrap
+      run: sudo apt-get install cmake clang libicu-dev uuid-dev libcurl4-openssl-dev zlib1g-dev libkrb5-dev libtinfo5
     - name: Build with dotnet
       run: dotnet publish /p:NativeLib=Shared -r linux-x64 -c release
     - name: Upload artifact
