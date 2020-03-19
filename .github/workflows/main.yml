@@ -27,4 +27,4 @@ jobs:
           # Artifact name
         name: linux-build
           # Directory containing files to upload
-        path: bin
+        path: ./src/bin/release/netstandard2.0/linux-x64
