@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace HCGStudio.HITScheduleMasterCore
@@ -207,6 +208,22 @@ namespace HCGStudio.HITScheduleMasterCore
 
             Week = week;
             return week;
+        }
+
+        public NativeSchedule ToNativeSchedule()
+        {
+            return new NativeSchedule
+            {
+                CourseLength = Length.Hours,
+                CourseName = Marshal.StringToCoTaskMemAnsi(CourseName),
+                CourseTime = (int)CourseTime,
+                Location = Marshal.StringToCoTaskMemAnsi(Location),
+                DayOfWeek = (int)DayOfWeek,
+                IsLongCourse = IsLongCourse,
+                MaxWeek = MaxWeek,
+                Teacher = Marshal.StringToCoTaskMemAnsi(Teacher),
+                Week = Week,
+            };
         }
     }
 }

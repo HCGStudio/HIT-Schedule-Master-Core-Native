@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using ExcelDataReader;
 using Ical.Net;
 using Ical.Net.CalendarComponents;
 using Ical.Net.DataTypes;
+using Newtonsoft.Json;
 
 namespace HCGStudio.HITScheduleMasterCore
 {
@@ -21,7 +23,8 @@ namespace HCGStudio.HITScheduleMasterCore
     /// <summary>
     ///     课表实例
     /// </summary>
-    public class Schedule
+    [JsonArray]
+    public class Schedule : IEnumerable<ScheduleEntry>
     {
         private readonly List<ScheduleEntry> _entries = new List<ScheduleEntry>();
 
@@ -184,6 +187,16 @@ namespace HCGStudio.HITScheduleMasterCore
             //};
             //calendar.Name = $"{Year}{sem}课程表";
             return calendar;
+        }
+
+        public IEnumerator<ScheduleEntry> GetEnumerator()
+        {
+            return Entries.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
